@@ -43,14 +43,17 @@
             // dgvListaArticulos
             // 
             this.dgvListaArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListaArticulos.Location = new System.Drawing.Point(13, 54);
+            this.dgvListaArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvListaArticulos.Location = new System.Drawing.Point(15, 54);
+            this.dgvListaArticulos.MultiSelect = false;
             this.dgvListaArticulos.Name = "dgvListaArticulos";
-            this.dgvListaArticulos.Size = new System.Drawing.Size(428, 231);
+            this.dgvListaArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvListaArticulos.Size = new System.Drawing.Size(568, 231);
             this.dgvListaArticulos.TabIndex = 0;
             // 
             // pcbImagenArticulo
             // 
-            this.pcbImagenArticulo.Location = new System.Drawing.Point(522, 54);
+            this.pcbImagenArticulo.Location = new System.Drawing.Point(601, 54);
             this.pcbImagenArticulo.Name = "pcbImagenArticulo";
             this.pcbImagenArticulo.Size = new System.Drawing.Size(174, 135);
             this.pcbImagenArticulo.TabIndex = 1;
@@ -124,6 +127,7 @@
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Artículos";
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbImagenArticulo)).EndInit();
             this.ResumeLayout(false);

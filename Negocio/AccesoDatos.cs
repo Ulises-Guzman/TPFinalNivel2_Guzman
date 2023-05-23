@@ -10,7 +10,7 @@ namespace Negocio
 {
     public class AccesoDatos
     {
-        //Declaro los atributos para realizar la conexion de manera centralizada
+        //Atributos para realizar la conexion de manera centralizada
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
@@ -24,18 +24,18 @@ namespace Negocio
         //Constructor SqlConnection y SqlCommand
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated segurity=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security=true");
             comando = new SqlCommand();
         }
 
-        //Seteo la Consulta
+        //Seteo de la Consulta
         public void setearConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
 
-        //Ejecuto la Lectura
+        //Ejecucion de la Lectura
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
@@ -57,7 +57,7 @@ namespace Negocio
         //Crear la lectura para los datos de las tablas Marca y Categoria
 
 
-        //Cerrar la Conexion
+        //Cierre de  la Conexion
         public void cerrarConexion()
         {
             if (lector != null)
