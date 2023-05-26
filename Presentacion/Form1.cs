@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Presentacion
 {
@@ -39,6 +40,7 @@ namespace Presentacion
                 listaArticulo = negocio.listar();
                 dgvListaArticulos.DataSource = listaArticulo;
                 ocultarColumnas();
+                cargarImagen(listaArticulo[0].ImagenUrl);
             }
             catch (Exception ex)
             {
@@ -51,6 +53,47 @@ namespace Presentacion
         {
             dgvListaArticulos.Columns["Id"].Visible = false;
             dgvListaArticulos.Columns["ImagenUrl"].Visible = false;
+            dgvListaArticulos.Columns["Descripcion"].Visible = false;
+            dgvListaArticulos.Columns["Precio"].Visible = false;
+        }
+
+        //Metodo para cargar las imagenes
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pcbImagenArticulo.Load(imagen);
+            }
+            catch (Exception)
+            {
+
+                pcbImagenArticulo.Load("https://avatars.mds.yandex.net/i?id=20d89bb5ee49b86f56972575dc36fb58691babcb-9182408-images-thumbs&n=13");
+            }
+        }
+
+        private void dgvListaArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            //Carga imagen de la fila y en el cambio de fila con la validacion de null
+            //Carga los detalles de articulo
+            if (dgvListaArticulos.CurrentRow != null)
+            {
+                Articulo seleccion = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccion.ImagenUrl);
+                cargarDetalles();
+            }
+        }
+
+        private void cargarDetalles()
+        {
+            Articulo detalles = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+            string descripcion = detalles.Descripcion;
+            double precio = (double)detalles.Precio;
+
+            txtDetalles.Text = "Descripción:" + Environment.NewLine;
+            txtDetalles.Text += descripcion + Environment.NewLine;
+            txtDetalles.Text += Environment.NewLine;
+            txtDetalles.Text += "Precio:";
+            txtDetalles.Text += " $" + precio;
         }
     }
 }

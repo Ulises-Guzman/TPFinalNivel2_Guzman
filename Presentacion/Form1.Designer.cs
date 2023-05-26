@@ -32,36 +32,40 @@
             this.pcbImagenArticulo = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.btnVerDetalles = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.lblListaArticulos = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtDetalles = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbImagenArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvListaArticulos
             // 
+            this.dgvListaArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvListaArticulos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvListaArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListaArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvListaArticulos.Location = new System.Drawing.Point(15, 54);
             this.dgvListaArticulos.MultiSelect = false;
             this.dgvListaArticulos.Name = "dgvListaArticulos";
             this.dgvListaArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListaArticulos.Size = new System.Drawing.Size(568, 231);
+            this.dgvListaArticulos.Size = new System.Drawing.Size(353, 216);
             this.dgvListaArticulos.TabIndex = 0;
+            this.dgvListaArticulos.SelectionChanged += new System.EventHandler(this.dgvListaArticulos_SelectionChanged);
             // 
             // pcbImagenArticulo
             // 
-            this.pcbImagenArticulo.Location = new System.Drawing.Point(601, 54);
+            this.pcbImagenArticulo.Location = new System.Drawing.Point(532, 54);
             this.pcbImagenArticulo.Name = "pcbImagenArticulo";
-            this.pcbImagenArticulo.Size = new System.Drawing.Size(174, 135);
+            this.pcbImagenArticulo.Size = new System.Drawing.Size(179, 188);
+            this.pcbImagenArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pcbImagenArticulo.TabIndex = 1;
             this.pcbImagenArticulo.TabStop = false;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(13, 373);
+            this.btnAgregar.Location = new System.Drawing.Point(15, 288);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 2;
@@ -70,25 +74,16 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(117, 373);
+            this.btnModificar.Location = new System.Drawing.Point(114, 288);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
-            // btnVerDetalles
-            // 
-            this.btnVerDetalles.Location = new System.Drawing.Point(215, 373);
-            this.btnVerDetalles.Name = "btnVerDetalles";
-            this.btnVerDetalles.Size = new System.Drawing.Size(75, 23);
-            this.btnVerDetalles.TabIndex = 4;
-            this.btnVerDetalles.Text = "Ver Detalles";
-            this.btnVerDetalles.UseVisualStyleBackColor = true;
-            // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(314, 373);
+            this.btnEliminar.Location = new System.Drawing.Point(227, 288);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 5;
@@ -106,20 +101,28 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(257, 322);
+            this.textBox1.Location = new System.Drawing.Point(145, 361);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(184, 20);
             this.textBox1.TabIndex = 7;
+            // 
+            // txtDetalles
+            // 
+            this.txtDetalles.Location = new System.Drawing.Point(458, 288);
+            this.txtDetalles.Multiline = true;
+            this.txtDetalles.Name = "txtDetalles";
+            this.txtDetalles.Size = new System.Drawing.Size(318, 108);
+            this.txtDetalles.TabIndex = 8;
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtDetalles);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblListaArticulos);
             this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnVerDetalles);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.pcbImagenArticulo);
@@ -141,10 +144,10 @@
         private System.Windows.Forms.PictureBox pcbImagenArticulo;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnVerDetalles;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Label lblListaArticulos;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtDetalles;
     }
 }
 
