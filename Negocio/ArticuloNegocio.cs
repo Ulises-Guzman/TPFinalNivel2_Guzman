@@ -12,8 +12,6 @@ namespace Negocio
     //Clase que contiene la maquetacion de  los datos y llamados a Funciones/Metodos
     public class ArticuloNegocio
     {
-        
-
         //Metodo listar()
         public List<Articulo> listar()
         {
@@ -39,11 +37,11 @@ namespace Negocio
                     aux.Precio = (decimal)datos.Lector["Precio"];
 
                     aux.Marca = new Marca();
-                    aux.Marca.Id = (int)datos.Lector["Id"];
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 
                     aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)datos.Lector["Id"];
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     
 
@@ -63,6 +61,86 @@ namespace Negocio
             finally
             {
                 //Cierro la conexion
+                datos.cerrarConexion();
+            }
+        }
+
+        //Agrega los nuevos articulos 
+        public void agregar(Articulo nuevoArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @imagenUrl, @precio)");
+                datos.setearParametro("@codigo", nuevoArticulo.Codigo);
+                datos.setearParametro("@nombre", nuevoArticulo.Nombre);
+                datos.setearParametro("@descripcion", nuevoArticulo.Descripcion);
+                datos.setearParametro("@idMarca", nuevoArticulo.Marca.Id);
+                datos.setearParametro("@idCategoria", nuevoArticulo.Categoria.Id);
+                datos.setearParametro("@imagenUrl", nuevoArticulo.ImagenUrl);
+                datos.setearParametro("@precio", nuevoArticulo.Precio);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //Modifica articulo seleccionado
+        public void modificar(Articulo articuloSeleccion)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE ARTICULOS SET Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, ImagenUrl = @imagenUrl, Precio = @precio WHERE Id = @id");
+                datos.setearParametro("@codigo", articuloSeleccion.Codigo);
+                datos.setearParametro("@nombre", articuloSeleccion.Nombre);
+                datos.setearParametro("@descripcion", articuloSeleccion.Descripcion);
+                datos.setearParametro("@idMarca", articuloSeleccion.Marca.Id);
+                datos.setearParametro("@idCategoria", articuloSeleccion.Categoria.Id);
+                datos.setearParametro("@imagenUrl", articuloSeleccion.ImagenUrl);
+                datos.setearParametro("@precio", articuloSeleccion.Precio);
+                datos.setearParametro("@id", articuloSeleccion.Id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //Elimina fisicamente
+        public void eliminarFisico(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("DELETE FROM ARTICULOS WHERE Id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
                 datos.cerrarConexion();
             }
         }

@@ -95,5 +95,55 @@ namespace Presentacion
             txtDetalles.Text += "Precio:";
             txtDetalles.Text += " $" + precio;
         }
+
+        //Metodo para abrir el frmAltaArticulo
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {   
+
+            frmAltaArticulo alta = new frmAltaArticulo();
+            alta.Text = "Agregar Artículo";
+            alta.ShowDialog();
+
+            //llamo al Metodo cargar(), para actualizar la grilla cuando agrego un nuevo articulo...
+            cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {   
+            //Asigno la fila del articulo seleccionado
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+
+            //Instancio el frmAltaArticulo con parametro objeto Articulo seleccionado
+            frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
+            modificar.Text = "Modificar Artículo";
+            modificar.ShowDialog();
+
+            cargar();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+          
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("¿Está seguro de Eliminar el Registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                    negocio.eliminarFisico(seleccionado.Id);
+                    cargar();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

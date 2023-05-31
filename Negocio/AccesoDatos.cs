@@ -52,11 +52,6 @@ namespace Negocio
             }
         }
 
-        //
-
-        //Crear la lectura para los datos de las tablas Marca y Categoria
-
-
         //Cierre de  la Conexion
         public void cerrarConexion()
         {
@@ -64,5 +59,29 @@ namespace Negocio
                 conexion.Close();
             conexion.Close();
         }
+
+        //Setea los Parametros para realizar la consulta SQL de los nuevos articulos
+        public void setearParametro(string nombre, object valor)
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
+        }
+
+        //Ejecuta la consulta SQL para agregar nuevos articulos
+        public void ejecutarAccion()
+        {
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }
