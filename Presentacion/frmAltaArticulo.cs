@@ -32,7 +32,16 @@ namespace Presentacion
         }
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
-        {
+        {   
+            //Seteo tooltips
+            ToolTip toolTip1 = new ToolTip();
+
+            toolTip1.AutoPopDelay = 3000;
+            toolTip1.InitialDelay = 50;
+            toolTip1.ReshowDelay = 500;
+
+            toolTip1.SetToolTip(this.txtPrecio, "Número decimal con 'coma' ");
+
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
@@ -83,7 +92,7 @@ namespace Presentacion
             catch (Exception)
             {
 
-                pcbImagenArticulo.Load("https://avatars.mds.yandex.net/i?id=20d89bb5ee49b86f56972575dc36fb58691babcb-9182408-images-thumbs&n=13"); ;
+                pcbImagenArticulo.Load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1wwaPU6CL-aQEa3w7xm3lQMgyI6ld2pnyeLeprDmWffeIvmUQ2rprHT4PuU0hQ9LzEUg&usqp=CAU"); ;
             }
         }
 
@@ -105,6 +114,9 @@ namespace Presentacion
 
             try
             {
+                if (validarAceptar())
+                    return;
+
                 //Capturo los valores de las TextBox y ComboBox, utilizado el objeto tipo Articulo
                 if (articulo == null)
                     articulo = new Articulo();
@@ -131,8 +143,6 @@ namespace Presentacion
                 }
 
                 Close();
-                //Investigar Actualizar el dgv desde aca
-                //...
             }
             catch (Exception ex)
             {
@@ -140,6 +150,85 @@ namespace Presentacion
                 MessageBox.Show(ex.ToString());
             }
             
+        }
+
+        //Validar Aceptar
+        private bool validarAceptar()
+        {
+            bool ban1 = false;
+            bool ban2 = false;
+
+            List<TextBox> lista1 = new List<TextBox>();
+            lista1.Add(txtCodigo);
+            lista1.Add(txtNombre);
+            lista1.Add(txtImagenUrl);
+            lista1.Add(txtDescripcion);
+            lista1.Add(txtPrecio);
+            //Cambio de Color
+            foreach (var item in lista1)
+            {
+                if (item.Text == "")
+                {
+                    item.BackColor = Color.Tomato;
+                }
+                else
+                    item.BackColor = Color.White;
+            }
+
+            //Llamo Validacion
+            
+
+            if (!(soloNumeros(txtPrecio.Text)))
+            {
+                MessageBox.Show("Ingresar sólo números");
+                return true;
+            }
+
+            List<ComboBox> lista2 = new List<ComboBox>();
+            lista2.Add(cmbMarca);
+            lista2.Add(cmbCategoria);
+            //Cambio de Color
+            foreach (var item in lista2)
+            {
+                if (item.SelectedIndex < 0)
+                {
+                    item.BackColor = Color.Tomato;
+                }
+                else
+                    item.BackColor = Color.White;
+            }
+
+            //banderas
+            foreach (var item in lista1)
+            {
+                if (item.BackColor == Color.Tomato)
+                    ban1 = true;
+            }
+
+            foreach (var item in lista2)
+            {
+                if (item.BackColor == Color.Tomato)
+                    ban2 = true;
+            }
+
+            if (ban1 || ban2)
+            {
+                MessageBox.Show("Por favor Complete todas las Casillas");
+                return true;
+            }
+            else
+                return false;
+        }
+
+        //Valida solonumeros
+        public bool soloNumeros(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsDigit(caracter) || char.IsPunctuation(caracter)))
+                    return false;
+            }
+            return true;
         }
     } 
 }
