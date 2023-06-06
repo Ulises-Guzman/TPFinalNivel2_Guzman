@@ -205,7 +205,7 @@ namespace Negocio
                             consulta += "Nombre LIKE '" + buscar + "%'";
                             break;
                         case "Termina con":
-                            consulta += "Nombre LIKE '%" + buscar + " '";
+                            consulta += "Nombre LIKE '%" + buscar + "'";
                             break;
                         default:
                             consulta += "Nombre LIKE '%" + buscar + "%'";
