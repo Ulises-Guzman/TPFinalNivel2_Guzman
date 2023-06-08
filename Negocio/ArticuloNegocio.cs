@@ -278,7 +278,6 @@ namespace Negocio
                     if (!(datos.Lector["Categoria"] is DBNull))
                         aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
 
-
                     lista.Add(aux);
                 }
 

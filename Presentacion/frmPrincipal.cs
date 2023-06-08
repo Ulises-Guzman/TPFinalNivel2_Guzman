@@ -48,8 +48,8 @@ namespace Presentacion
             toolTip2.InitialDelay = 50;
             toolTip2.ReshowDelay = 500;
 
-            toolTip1.SetToolTip(this.txtRango1, "Número decimal con 'coma' ");
-            toolTip2.SetToolTip(this.txtRango2, "Número decimal con 'coma' ");
+            toolTip1.SetToolTip(this.txtRango1, "Rango Menor");
+            toolTip2.SetToolTip(this.txtRango2, "Rango Mayor");
 
         }
 
@@ -219,6 +219,7 @@ namespace Presentacion
 
                 dgvListaArticulos.DataSource = negocio.buscar(campo, criterio, buscar, rango1, rango2);
 
+                //Reseteo la marca del CheckBox
                 if (ckbRango.Checked)
                     ckbRango.Checked = false;
             }

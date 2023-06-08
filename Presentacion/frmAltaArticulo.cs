@@ -40,7 +40,7 @@ namespace Presentacion
             toolTip1.InitialDelay = 50;
             toolTip1.ReshowDelay = 500;
 
-            toolTip1.SetToolTip(this.txtPrecio, "Número decimal con 'coma' ");
+            toolTip1.SetToolTip(this.txtPrecio, "Número decimal escribir con 'coma' ");
 
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
